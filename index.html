@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TOP FM</title>
+  <style>
+    /* Add some styling for the player interface */
+    .player {
+      width: 500px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .player audio {
+      width: 100%;
+    }
+    .song-title {
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="player">
+    <h1>Welcome to My Radio Stream</h1>
+    <audio controls>
+      <source src="http://213.170.135.131:6259/live" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+    <div class="song-title"></div>
+  </div>
+  <script>
+    // Get references to the audio element, the song title div
+    var audio = document.querySelector('audio');
+    var songTitle = document.querySelector('.song-title');
+
+    // Add an event listener for when the audio metadata is loaded
+    audio.addEventListener('loadedmetadata', function() {
+      // Check if the title property is available in the metadata
+      if (audio.metadata.hasOwnProperty('title')) {
+        songTitle.innerHTML = audio.metadata.title;
+      } else {
+        songTitle.innerHTML = "Unknown Song";
+      }
+    });
+  </script>
+</body>
+</html>
